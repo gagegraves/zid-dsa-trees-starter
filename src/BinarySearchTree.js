@@ -127,8 +127,57 @@ class BinarySearchTree {
     }
     return this.left._findMin();
   }
-}
-
-/*  _replaceWith() is used to find the node you want to use to replace a node that has children. If the node that you are replacing has a parent, then you need to wire up the references from the parent to the replacement node, and the replacement node back to the parent. Otherwise, if the node is a root node, then you simply copy over the properties of the replacement node.
-//*-------------------------------------------------------
+  /*  _replaceWith() is used to find the node you want to use to replace a node that has children. If the node that you are replacing has a parent, then you need to wire up the references from the parent to the replacement node, and the replacement node back to the parent. Otherwise, if the node is a root node, then you simply copy over the properties of the replacement node.
 _findMin() is used to find the minimum value from the right subtree. When you are removing a node from the tree that has two children, you want to replace the node with the smallest node from the right subtree.*/
+//*-------------------------------------------------------
+  dfsInOrder(values = []) {
+    // First, process the left node recursively
+    if (this.left) {
+      values = this.left.dfsInOrder(values);
+    }
+
+    // Next, process the current node
+    values.push(this.value);
+
+    // Finally, process the right node recursively
+    if (this.right) {
+      values = this.right.dfsInOrder(values);
+    }
+
+    return values;
+  }
+//*-------------------------------------------------------
+  dfsPreOrder(values=[]) {
+    // First, process the current node
+    values.push(this.value);
+
+    // Next, process the left node recursively
+    if (this.left) {
+      values = this.left.dfsPreOrder(values);
+    }
+
+    // Finally, process the right node recursively
+    if (this.right) {
+      values = this.right.dfsPreOrder(values);
+    }
+
+    return values;
+  }
+//*-------------------------------------------------------
+  dfsPostOrder(values = []) {
+    // First, process the left node recursively
+    if (this.left) {
+      values = this.left.dfsPostOrder(values);
+    }
+
+    // Next, process the right node recursively
+    if (this.right) {
+      values = this.right.dfsPostOrder(values);
+    }
+
+    // Finally, process the current node
+    values.push(this.value);
+
+    return values;
+  }
+}
